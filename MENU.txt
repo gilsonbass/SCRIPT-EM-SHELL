@@ -1,0 +1,60 @@
+
+ sistema=$(dialog \
+ --menu \
+ "* INFORME A OPÇÃO DESEJADA*\
+ \nLOJA CEARA" 30 45 25 \
+1 "ATUALIZA GRAFICO" \
+2 "REINICIAR PDV" \
+3 "VER PDV" \
+4 "PING BALANCA" \
+5 "SAIR" \
+6 "LIGAR TODOS PDV" --stdout)
+# read opcao;
+
+        if [ $sistema == "1" ]
+        then
+        echo "Digite o final"
+        read ip;
+
+sshpass -p '**' ssh root@192.168.2.$ip killall login
+        #echo "o processo foi realizado com sucesso!"
+        #echo "Obrigado!!"
+zenity --info --text="ATUALIZADO COM SUCESSO" 10 50
+ dialog  --title "CPD loja 02" --infobox "Seu processo foi comcluido com sucesso" 10 50
+       sleep 2
+       clear
+
+        elif [ $sistema == "2" ]
+                then
+        ##echo "digite a faixa"
+        #read faixa;
+        echo "digite o final 3 digitos"
+        read ip;
+sshpass -p '**' ssh root@192.168.2.$ip reboot
+
+        elif [ $sistema == "3" ]
+                then
+                viewerpdv
+        elif [ $sistema == "4" ]
+                then
+        balanca
+sl
+clear
+
+        elif [ $sistema == "5" ]
+                then
+         sl
+        cmatrix
+
+elif [ $sistema == "6"  ]
+        then
+        ligarpdv
+
+elif [ $sistema == "0" ]
+        then
+dialog  --title "BOA NOITE ATE AMANHÃ" --infobox "Para desligar digite "juizo"" 10 50
+
+# echo "coloque sua senha aqui"
+ systemctl halt -i
+fi
+
